@@ -1,15 +1,10 @@
 <p align="center"><a href="https://github.com/lyswhut/lx-music-desktop"><img width="200" src="https://github.com/lyswhut/lx-music-desktop/blob/master/doc/images/icon.png" alt="lx-music logo"></a></p>
 
-<h1 align="center">LX Music 桌面版</h1>
+<h1 align="center">lx-music-desktop-ui-refactor</h1>
 
 <p align="center">
-  <a href="https://github.com/lyswhut/lx-music-desktop/releases"><img src="https://img.shields.io/github/release/lyswhut/lx-music-desktop" alt="Release version"></a>
-  <a href="https://github.com/lyswhut/lx-music-desktop/actions/workflows/release.yml"><img src="https://github.com/lyswhut/lx-music-desktop/workflows/Build/badge.svg" alt="Build status"></a>
-  <a href="https://github.com/lyswhut/lx-music-desktop/actions/workflows/beta-pack.yml"><img src="https://github.com/lyswhut/lx-music-desktop/workflows/Build%20Beta/badge.svg" alt="Build status"></a>
-  <a href="https://electronjs.org/releases/stable"><img src="https://img.shields.io/github/package-json/dependency-version/lyswhut/lx-music-desktop/dev/electron/master" alt="Electron version"></a>
-  <!-- <a href="https://github.com/lyswhut/lx-music-desktop/releases"><img src="https://img.shields.io/github/downloads/lyswhut/lx-music-desktop/latest/total" alt="Downloads"></a> -->
-  <a href="https://github.com/lyswhut/lx-music-desktop/tree/dev"><img src="https://img.shields.io/github/package-json/v/lyswhut/lx-music-desktop/dev" alt="Dev branch version"></a>
-  <!-- <a href="https://github.com/lyswhut/lx-music-desktop/blob/master/LICENSE"><img src="https://img.shields.io/github/license/lyswhut/lx-music-desktop" alt="License"></a> -->
+  <a href="https://github.com/lyswhut/lx-music-desktop"><img src="https://img.shields.io/badge/upstream-lyswhut%2Flx--music--desktop-2ea44f" alt="upstream"></a>
+  <a href="https://github.com/lyswhut/lx-music-desktop/blob/master/LICENSE"><img src="https://img.shields.io/github/license/lyswhut/lx-music-desktop" alt="License"></a>
 </p>
 
 <!-- [![GitHub release][1]][2]
@@ -30,9 +25,25 @@
 [9]: https://img.shields.io/github/license/lyswhut/lx-music-desktop
 [10]: https://github.com/lyswhut/lx-music-desktop/blob/master/LICENSE -->
 
-<p align="center">一个基于 Electron & Vue 开发的音乐软件</p>
+<p align="center">基于 <code>lyswhut/lx-music-desktop</code> 修改的 UI 重构版本，当前主要聚焦播放详情页优化。</p>
 
 ## 说明
+
+本仓库不是原项目官方仓库，而是基于以下项目进行的个人修改版本：
+
+- 原项目：<https://github.com/lyswhut/lx-music-desktop>
+
+当前改动重点包括：
+
+- 播放详情页布局调整
+- 左侧唱片/封面区域视觉重构
+- 歌曲信息区长文本滚动展示优化
+- 底部主控制区样式调整
+- 歌词右键菜单与歌词显示细节优化
+
+如需向原项目贡献代码，请以原项目仓库的说明、Issue 讨论及 `dev` 分支 PR 流程为准。
+
+---
 
 所用技术栈：
 

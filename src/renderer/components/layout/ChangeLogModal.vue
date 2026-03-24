@@ -4,6 +4,17 @@ material-modal(:show="isShowChangeLog" max-width="60%" @close="isShowChangeLog =
     h2 当前版本更新日志
     div.scroll.select(:class="$style.info")
       div(:class="$style.current")
+        h3 当前分支信息：
+        p(:class="$style.note")
+          | 你当前使用的是
+          strong  LX Music UR
+          | ，这是基于上游项目修改的 UI 重构分支。
+        p(:class="$style.note")
+          | 当前分支仓库：
+          span.hover.underline(aria-label="点击打开" @click="openUrl('https://github.com/pp031212/lx-music-desktop-ui-refactor#readme')") https://github.com/pp031212/lx-music-desktop-ui-refactor
+        p(:class="$style.note")
+          | 上游项目仓库：
+          span.hover.underline(aria-label="点击打开" @click="openUrl('https://github.com/lyswhut/lx-music-desktop#readme')") https://github.com/lyswhut/lx-music-desktop
         h3 当前版本：{{ versionInfo.version }}
         template(v-if="info.desc")
           h3 版本变化：
@@ -17,6 +28,7 @@ material-modal(:show="isShowChangeLog" max-width="60%" @close="isShowChangeLog =
     div(:class="$style.footer")
       div(:class="$style.desc")
         p 📢&nbsp;为了减少疑问，我们墙裂建议阅读版本更新日志来了解当前所用版本的变化！
+        p 📢&nbsp;上面展示的版本日志主体仍然来自上游项目记录；当前分支的独立信息请以上方仓库链接为准。
         p 📢&nbsp;若遇到问题可以阅读
           strong.hover.underline(aria-label="点击打开" @click="openUrl('https://lyswhut.github.io/lx-music-doc/desktop/faq')") 桌面版常见问题
           | 。
@@ -134,6 +146,10 @@ export default {
   > p {
     padding-left: 15px;
   }
+}
+
+.note {
+  padding-left: 15px;
 }
 
 .desc {

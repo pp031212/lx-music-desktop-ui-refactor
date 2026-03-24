@@ -9,14 +9,14 @@ const afterPack = require('./build-after-pack')
 * @see https://www.electron.build/configuration/configuration
 */
 const options = {
-  appId: 'cn.toside.music.desktop',
-  productName: 'lx-music-desktop',
+  appId: 'io.github.pp031212.lx_music_desktop_ui_refactor',
+  productName: 'LX Music UR',
   beforePack,
   afterPack,
   protocols: {
-    name: 'lx-music-protocol',
+    name: 'lx-music-ui-refactor-protocol',
     schemes: [
-      'lxmusic',
+      'lxmusicuirefactor',
     ],
   },
   directories: {
@@ -47,8 +47,8 @@ const options = {
   publish: [
     {
       provider: 'github',
-      owner: 'lyswhut',
-      repo: 'lx-music-desktop',
+      owner: 'pp031212',
+      repo: 'lx-music-desktop-ui-refactor',
     },
   ],
 }
@@ -59,7 +59,7 @@ const options = {
 const winOptions = {
   win: {
     icon: './resources/icons/icon.ico',
-    legalTrademarks: 'lyswhut',
+    legalTrademarks: 'pp031212 (UI Refactor based on lyswhut)',
     // artifactName: '${productName}-v${version}-${env.ARCH}-${env.TARGET}.${ext}',
   },
   nsis: {
@@ -68,7 +68,7 @@ const winOptions = {
     allowToChangeInstallationDirectory: true,
     // differentialPackage: true,
     license: './licenses/license.rtf',
-    shortcutName: 'LX Music',
+    shortcutName: 'LX Music UR',
   },
 }
 /**
@@ -77,7 +77,7 @@ const winOptions = {
  */
 const linuxOptions = {
   linux: {
-    maintainer: 'lyswhut <lyswhut@qq.com>',
+    maintainer: 'pp031212',
     // artifactName: '${productName}-${version}.${env.ARCH}.${ext}',
     icon: './resources/icons',
     category: 'Utility;AudioVideo;Audio;Player;Music;',
@@ -87,11 +87,11 @@ const linuxOptions = {
       // https://specifications.freedesktop.org/desktop-entry-spec/latest/example.html
       // https://developer.gnome.org/documentation/guidelines/maintainer/integrating.html#desktop-files
       entry: {
-        Name: 'LX Music',
-        'Name[zh_CN]': 'LX Music',
-        'Name[zh_TW]': 'LX Music',
+        Name: 'LX Music UR',
+        'Name[zh_CN]': 'LX Music UR',
+        'Name[zh_TW]': 'LX Music UR',
         Encoding: 'UTF-8',
-        MimeType: 'x-scheme-handler/lxmusic',
+        MimeType: 'x-scheme-handler/lxmusicuirefactor',
         StartupNotify: 'false',
       },
     },
@@ -128,7 +128,7 @@ const macOptions = {
         path: '/Applications',
       },
     ],
-    title: 'LX Music v${version}',
+    title: 'LX Music UR v${version}',
   },
 }
 

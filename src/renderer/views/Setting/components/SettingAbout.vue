@@ -2,11 +2,31 @@
 dt#about {{ $t('setting__about') }}
 dd
   .p.small
-    | 本软件完全免费，代码已开源。开源地址：
+    strong 当前分支：
+    | &nbsp;LX Music UR（UI 重构版）
+  .p.small
+    | 当前分支仓库：
+    span.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/pp031212/lx-music-desktop-ui-refactor#readme')") https://github.com/pp031212/lx-music-desktop-ui-refactor
+  .p.small
+    | 当前分支下载地址：
+    span.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/pp031212/lx-music-desktop-ui-refactor/releases')") GitHub Releases
+  .p.small
+    | 当前分支 Issue：
+    span.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/pp031212/lx-music-desktop-ui-refactor/issues?q=is%3Aissue+')") 提交&nbsp;Issue
+  br
+  .p.small
+    strong 上游项目：
+    | &nbsp;lyswhut / lx-music-desktop
+  .p.small
+    | 上游项目仓库：
     span.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/lyswhut/lx-music-desktop#readme')") https://github.com/lyswhut/lx-music-desktop
   .p.small
-    | 最新版下载地址：
+    | 上游项目发布页：
     span.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/lyswhut/lx-music-desktop/releases')") GitHub Releases
+  .p.small
+    | 上游项目 Issue：
+    span.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/lyswhut/lx-music-desktop/issues?q=is%3Aissue+')") 提交&nbsp;Issue
+  br
   .p.small
     | 软件的常见问题可转至：
     span.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://lyswhut.github.io/lx-music-doc/desktop/faq')") 桌面版常见问题
@@ -15,10 +35,6 @@ dd
     | ，但我们整理了一些常见的使用问题。
     strong 仔细、仔细、仔细
     | 地阅读常见问题后，
-  .p.small
-    | 仍有问题可到&nbsp;GitHub&nbsp;
-    span.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/lyswhut/lx-music-desktop/issues?q=is%3Aissue+')") 提交&nbsp;Issue
-    | 。
   br
   .p.small 由于软件开发的初衷仅是为了对新技术的学习与研究，因此软件直至停止维护都将会一直保持纯净。
   .p.small
@@ -32,13 +48,19 @@ dd
     | 你已签署本软件的
     base-btn(min @click="handleShowPact") 许可协议
     | ，协议的在线版本在
-    strong.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/lyswhut/lx-music-desktop#%E9%A1%B9%E7%9B%AE%E5%8D%8F%E8%AE%AE')") 这里
+    strong.hover.underline(:aria-label="$t('setting__click_open')" @click="openUrl('https://github.com/pp031212/lx-music-desktop-ui-refactor#readme')") 这里
     | 。
   br
 
   .p.small
     | By:&nbsp;
-    strong 落雪无痕
+    strong pp031212
+  .p.small
+    | Upstream (原作者):&nbsp;
+    strong 落雪无痕 (lyswhut)
+  .p.small
+    | UI Style (视觉参考):&nbsp;
+    strong any-listen
 </template>
 
 <script>

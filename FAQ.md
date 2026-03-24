@@ -1,4 +1,4 @@
-# lx-music-desktop 常见问题
+# LX Music UR 常见问题
 
 本文档已迁移至：<https://lyswhut.github.io/lx-music-doc/desktop/faq>
 
@@ -181,7 +181,7 @@
 
 ### Windows 10、11界面异常、界面无法显示
 
-尝试添加运行参数 `--disable-gpu-sandbox` 启动，例如：`.\lx-music-desktop.exe --disable-gpu-sandbox`，添加方法可自行百度“给快捷方式加参数”。
+尝试添加运行参数 `--disable-gpu-sandbox` 启动，例如：`.\LX Music UR.exe --disable-gpu-sandbox`，添加方法可自行百度“给快捷方式加参数”。
 
 若以上方法无效，则尝试将 `--disable-gpu-sandbox` 逐个换成以下参数启动，直到恢复正常为止：
 
@@ -202,7 +202,7 @@
 > 在 windows 操作系统上, 当 DWM 被禁用时, 透明窗口将无法工作。
 
 因此，当 win7 没有使用**Aero**主题时界面将会显示异常，开启AERO的方法请自行百度：`win7开启Aero效果`（开启后可看到任务栏变透明）。<br>
-从`0.14.0`版本起不再强制要求开启透明效果，若你实在不想开启（若非电脑配置太低，墙裂建议开启！），可通过添加运行参数`-dt`来运行程序即可，例如：`.\lx-music-desktop.exe -dt`，添加方法可自行百度“给快捷方式加参数”，该参数的作用是用来控制程序是否使用非透明窗口运行。
+从`0.14.0`版本起不再强制要求开启透明效果，若你实在不想开启（若非电脑配置太低，墙裂建议开启！），可通过添加运行参数`-dt`来运行程序即可，例如：`.\LX Music UR.exe -dt`，添加方法可自行百度“给快捷方式加参数”，该参数的作用是用来控制程序是否使用非透明窗口运行。
 
 注：启用**Aero**主题后，若软件出现黑边框，则重启软件即可恢复正常。
 
@@ -211,7 +211,7 @@
 ### Linux 下界面异常
 
 根据Electron里issue的[解决方案](https://github.com/electron/electron/issues/2170#issuecomment-736223269)，<br>
-若你遇到透明问题可尝试添加启动参数 `-dha` 来禁用硬件加速，例如：`.\lx-music-desktop.exe -dha`。
+若你遇到透明问题可尝试添加启动参数 `-dha` 来禁用硬件加速，例如：`.\LX Music UR.exe -dha`。
 
 注：v1.6.0及之后的版本才支持`-dha`参数
 
@@ -315,10 +315,10 @@ Windows 7 未开启 Aero 效果时桌面歌词会有问题，详情看上面的 
 - 以管理员权限打开`cmd`，输入`sfc /scannow`回车等待检查完成重启电脑
 - 若上面的方法**修复、重启**电脑后仍然不行，就自行百度弹出的**错误信息**看下别人是怎么解决的
 
-## MAC OS无法启动软件，提示 lx-music-desktop 已损坏
+## MAC OS无法启动软件，提示 LX Music UR 已损坏
 
 这是因为软件没有签名，被系统阻止运行，<br>
-在终端里输入 `sudo xattr -rd com.apple.quarantine /Applications/lx-music-desktop.app`，然后输入你的电脑密码即可
+在终端里输入 `sudo xattr -rd com.apple.quarantine "/Applications/LX Music UR.app"`，然后输入你的电脑密码即可
 
 还可以参考：
 
@@ -329,9 +329,9 @@ Windows 7 未开启 Aero 效果时桌面歌词会有问题，详情看上面的 
 
 默认情况下，软件的数据存储在：
 
-- Windows：`%APPDATA%/lx-music-desktop`
-- Linux：`$XDG_CONFIG_HOME/lx-music-desktop` 或 `~/.config/lx-music-desktop`
-- macOS：`~/Library/Application/lx-music-desktop`
+- Windows：`%APPDATA%/lx-music-desktop-ui-refactor`
+- Linux：`$XDG_CONFIG_HOME/lx-music-desktop-ui-refactor` 或 `~/.config/lx-music-desktop-ui-refactor`
+- macOS：`~/Library/Application Support/lx-music-desktop-ui-refactor`
 
 在Windows平台下，若程序目录下存在`portable`目录，则自动使用此目录作为数据存储目录（v1.17.0新增）。
 
@@ -358,28 +358,28 @@ Windows 7 未开启 Aero 效果时桌面歌词会有问题，详情看上面的 
 - `-play` 启动时播放指定列表的音乐，参数说明：
   - `type`：播放类型，目前固定为`songList`
   - `source`：播放源，可用值为`kw/kg/tx/wy/mg/myList`，其中`kw/kg/tx/wy/mg`对应各源的在线列表，`myList`为本地列表
-  - `link`：要播放的在线列表歌单链接、或ID，source为`kw/kg/tx/wy/mg`之一（在线列表）时必传，举例：`./lx-music-desktop -play="type=songList&source=kw&link=歌单URL or ID"`，注意：如果传入URL时必须对URL进行编码后再传入
-  - `name`：要播放的本地列表歌单名字，source为`myList`时必传，举例：`./lx-music-desktop -play="type=songList&source=myList&name=默认列表"`
-  - `index`：从列表的哪个位置开始播放，选传，若不传默认播放第一首歌曲，举例：`./lx-music-desktop -play="type=songList&source=myList&name=默认列表&index=2"`
+  - `link`：要播放的在线列表歌单链接、或ID，source为`kw/kg/tx/wy/mg`之一（在线列表）时必传，举例：`./LX Music UR -play="type=songList&source=kw&link=歌单URL or ID"`，注意：如果传入URL时必须对URL进行编码后再传入
+  - `name`：要播放的本地列表歌单名字，source为`myList`时必传，举例：`./LX Music UR -play="type=songList&source=myList&name=默认列表"`
+  - `index`：从列表的哪个位置开始播放，选传，若不传默认播放第一首歌曲，举例：`./LX Music UR -play="type=songList&source=myList&name=默认列表&index=2"`
 
 ## Scheme URL支持
 
-从v1.17.0起支持 Scheme URL，可以使用此功能从浏览器等场景下调用LX Music，我们开发了一个[油猴脚本](https://github.com/lyswhut/lx-music-script#readme)配套使用<br>
+当前版本支持 Scheme URL，可以使用此功能从浏览器等场景下调用 LX Music UR，上游还提供了一个[油猴脚本](https://github.com/lyswhut/lx-music-script#readme)可供参考<br>
 脚本安装地址：<https://greasyfork.org/zh-CN/scripts/438148><br>
 以下是目前可用的Scheme URL调用方式：
 
-- URL统一以`lxmusic://`开头
+- URL统一以`lxmusicuirefactor://`开头
 - 若无特别说明，源的可用值为：`kw/kg/tx/wy/mg`
 - 若无特别说明，音质的可用值为：`128k/320k/flac/flac24bit`
 
 目前支持两种传参方式：
 
-- 通过`data`传参，以经过URL编码的JSON数据传参，例：`lxmusic://music/play?data=xxxx`，其中`xxxx`为经过URL编码后的JSON数据，支持复杂的参数调用
-- 通过`URL`传参，适用于简单传参的调用，不需要转成JSON格式，例：`lxmusic://music/search/xxxx`，但仍然需要对数据进行URL编码，只适应于简单参数调用（v1.18.0新增）
+- 通过`data`传参，以经过URL编码的JSON数据传参，例：`lxmusicuirefactor://music/play?data=xxxx`，其中`xxxx`为经过URL编码后的JSON数据，支持复杂的参数调用
+- 通过`URL`传参，适用于简单传参的调用，不需要转成JSON格式，例：`lxmusicuirefactor://music/search/xxxx`，但仍然需要对数据进行URL编码，只适应于简单参数调用（v1.18.0新增）
 
 ### `data`方式传参
 
-以经过URL编码的JSON数据传参，例：`lxmusic://music/play?data=xxxx`，其中`xxxx`为经过URL编码后的JSON数据，JSON数据内容取决于下表的参数部分
+以经过URL编码的JSON数据传参，例：`lxmusicuirefactor://music/play?data=xxxx`，其中`xxxx`为经过URL编码后的JSON数据，JSON数据内容取决于下表的参数部分
 
 | 描述 | URL | 参数
 | --- | --- | ---

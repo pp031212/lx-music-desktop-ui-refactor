@@ -1,5 +1,5 @@
 {
-  "name": "lx-music-desktop",
+  "name": "lx-music-desktop-ui-refactor",
   "version": "2.12.1",
   "description": "一个免费的音乐查找助手",
   "main": "./dist/main.js",
@@ -76,21 +76,21 @@
   },
   "macLanguagesInfoPlistStrings": {
     "en": {
-      "CFBundleDisplayName": "LX Music",
-      "CFBundleName": "LX Music"
+      "CFBundleDisplayName": "LX Music UR",
+      "CFBundleName": "LX Music UR"
     },
     "zh_CN": {
-      "CFBundleDisplayName": "LX Music",
-      "CFBundleName": "LX Music"
+      "CFBundleDisplayName": "LX Music UR",
+      "CFBundleName": "LX Music UR"
     },
     "zh_TW": {
-      "CFBundleDisplayName": "LX Music",
-      "CFBundleName": "LX Music"
+      "CFBundleDisplayName": "LX Music UR",
+      "CFBundleName": "LX Music UR"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lyswhut/lx-music-desktop.git"
+    "url": "git+https://github.com/pp031212/lx-music-desktop-ui-refactor.git"
   },
   "keywords": [
     "music-player",
@@ -98,14 +98,13 @@
     "vuejs3"
   ],
   "author": {
-    "name": "lyswhut",
-    "email": "lyswhut@qq.com"
+    "name": "pp031212"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/lyswhut/lx-music-desktop/issues"
+    "url": "https://github.com/pp031212/lx-music-desktop-ui-refactor/issues"
   },
-  "homepage": "https://github.com/lyswhut/lx-music-desktop#readme",
+  "homepage": "https://github.com/pp031212/lx-music-desktop-ui-refactor#readme",
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",

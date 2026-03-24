@@ -67,8 +67,8 @@ const defaultSetting: LX.AppSetting = {
 
   'playDetail.isZoomActiveLrc': false,
   'playDetail.isShowLyricProgressSetting': false,
-  'playDetail.style.fontSize': 140,
-  'playDetail.style.align': 'center',
+  'playDetail.style.fontSize': 160,
+  'playDetail.style.align': 'left',
   'playDetail.style.fontWeight': true,
   'playDetail.isDelayScroll': true,
 
@@ -151,8 +151,8 @@ const defaultSetting: LX.AppSetting = {
   'openAPI.bindLan': false,
 
   // 'theme.id': 'blue_plus',
-  'theme.id': 'green',
-  'theme.lightId': 'green',
+  'theme.id': 'blue',
+  'theme.lightId': 'blue',
   'theme.darkId': 'black',
 
   'odc.isAutoClearSearchInput': false,

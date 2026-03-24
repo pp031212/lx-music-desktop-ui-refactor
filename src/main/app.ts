@@ -125,15 +125,23 @@ export const applyElectronEnvParams = () => {
 }
 
 export const setUserDataPath = () => {
+  app.setName('LX Music UR')
+  let isPortable = false
+
   // windows平台下如果应用目录下存在 portable 文件夹则将数据存在此文件下
   if (process.platform == 'win32') {
     const portablePath = path.join(path.dirname(app.getPath('exe')), '/portable')
     if (existsSync(portablePath)) {
+      isPortable = true
       app.setPath('appData', portablePath)
       const appDataPath = path.join(portablePath, '/userData')
       if (!existsSync(appDataPath)) mkdirSync(appDataPath)
       app.setPath('userData', appDataPath)
     }
+  }
+
+  if (!isPortable) {
+    app.setPath('userData', path.join(app.getPath('appData'), 'lx-music-desktop-ui-refactor'))
   }
 
   const userDataPath = app.getPath('userData')
@@ -147,9 +155,9 @@ export const registerDeeplink = (startApp: () => void) => {
     // Set the path of electron.exe and your app.
     // These two additional parameters are only available on windows.
     // console.log(process.execPath, process.argv)
-    app.setAsDefaultProtocolClient('lxmusic', process.execPath, process.argv.slice(1))
+    app.setAsDefaultProtocolClient('lxmusicuirefactor', process.execPath, process.argv.slice(1))
   } else {
-    app.setAsDefaultProtocolClient('lxmusic')
+    app.setAsDefaultProtocolClient('lxmusicuirefactor')
   }
 
   // deep link

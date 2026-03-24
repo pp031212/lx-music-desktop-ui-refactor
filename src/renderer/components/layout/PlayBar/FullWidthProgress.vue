@@ -150,120 +150,138 @@ export default {
 .player {
   position: relative;
   height: @height-player;
-  // border-top: 1px solid var(--color-primary-alpha-900);
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   contain: strict;
-  padding: 8px 6px 6px;
-  z-index: 2;
-  // box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 20px 8px; // 增加底部 padding，让内容视觉上浮
+  z-index: 10;
+  
+  // 稳重的厚面板风格
+  backdrop-filter: blur(@ui-glass-blur);
+  background-color: @ui-glass-background;
+  border: @ui-glass-border;
+  border-radius: @ui-radius-component;
+  box-shadow: @ui-shadow-soft;
+  transition: @transition-normal;
+  transition-property: background-color, box-shadow;
+
   * {
     box-sizing: border-box;
   }
 
   &:before {
-    .mixin-after();
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-main-background);
-    opacity: .9;
-    z-index: -1;
+    display: none;
   }
 }
 .progress {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: -1px; // 稍微往上提
+  left: 12px;
+  right: 12px;
   padding-bottom: 6px;
-  // height: 15px;
   .progressBar {
-    height: 2px;
-    border-radius: 0;
+    height: 3px; 
+    border-radius: 4px;
+    background-color: var(--color-primary-alpha-200);
   }
 }
 
 .picContent {
-  height: 100%;
+  height: 75%; // 在 76px 高度下展现更多细节
   aspect-ratio: 1 / 1;
-
-  // color: var(--color-primary);
-  // transition: @transition-normal;
-  // transition-property: color;
   flex: none;
-  opacity: 1;
-  transition: opacity @transition-fast;
-  // transition-property: opacity;
+  transition: transform @transition-fast;
   display: flex;
   justify-content: center;
-  // align-items: center;
   cursor: pointer;
+  margin-top: -4px; // 向上微调重心
 
   &:hover {
-    opacity: .8;
+    transform: scale(1.05);
   }
 
-  // svg {
-  //   fill: currentColor;
-  // }
   img {
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @ui-shadow-glass;
     max-width: 100%;
     max-height: 100%;
-    transition: @transition-normal;
-    transition-property: border-color;
-    // border-radius: 50%;
-    border-radius: @radius-border;
-    // border: 2px solid @color-theme_2-background_1;
-  }
-
-  .emptyPic {
-    background-color: var(--color-primary-light-900-alpha-200);
-    border-radius: @radius-border;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-primary-light-400-alpha-200);
-    user-select: none;
-    font-size: 20px;
-    font-family: Consolas, "Courier New", monospace;
-
-    span {
-      padding-left: 3px;
-    }
+    border-radius: @ui-radius-component;
+    object-fit: cover;
   }
 }
 
 .infoContent {
-  padding-left: 10px;
+  padding-left: 20px; 
   flex: auto;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: flex-start;
-  font-size: 13px;
-  color: var(--color-font);
   min-width: 0;
-  line-height: 1.5;
+  gap: 1px;
+  margin-top: -6px; // 向上微调重心
 }
 
 .title {
   max-width: 100%;
-  font-size: 12px;
-  color: var(--color-font-label);
+  font-size: 14px; // 稍微下调至更平衡的值
+  font-weight: @ui-font-weight-title;
+  color: var(--color-font);
   .mixin-ellipsis-1();
 }
 .status {
-  padding-top: 3px;
-  height: 23px;
+  padding-top: 0px;
+  font-size: 11px;
+  color: var(--color-font-label);
   .mixin-ellipsis-1();
   max-width: 100%;
+}
+
+.playBtnContent {
+  height: 100%;
+  flex: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 15px;
+  gap: 20px; // 增加间距
+  margin-top: -4px; // 向上微调重心
+}
+
+.playBtn {
+  flex: none;
+  height: 32px; // 强制固定高度，不再跟随百分比变大
+  width: 32px;
+  transition: @transition-fast;
+  transition-property: color, opacity, transform;
+  color: var(--color-button-font);
+  opacity: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    fill: currentColor;
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.2));
+  }
+  
+  // 针对中间主播放按钮的特殊样式（第二个子元素）
+  &:nth-child(2) {
+    height: 38px;
+    width: 38px;
+  }
+
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+  &:active {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
 }
 
 .timeContent {

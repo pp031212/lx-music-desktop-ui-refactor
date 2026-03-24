@@ -6,7 +6,9 @@
 
 // Height
 @height-toolbar: 54px;
-@height-player: 66px;
+@height-player: 76px; // 从 84px 下调至 76px，更精炼
+
+
 
 
 // Shadow
@@ -22,3 +24,28 @@
 @transition-fast: .3s ease;
 
 @form-radius: 3px;
+
+
+// Any Listen UI System (Refined)
+// ----------------------------------------------------------------
+@ui-glass-blur: 16px; // 降低模糊度，减少视觉干扰
+@ui-glass-background: var(--color-main-background-alpha-800);
+@ui-glass-border: 1px solid var(--color-primary-light-100-alpha-150);
+
+@ui-radius-card: 12px;       // 从 24px 减小到 12px，更专业
+@ui-radius-component: 6px;   // 从 12px 减小到 6px
+@ui-radius-round: 50%;
+
+@ui-shadow-soft: 0 4px 20px 0 rgba(0, 0, 0, 0.08); // 更轻微的阴影
+@ui-shadow-glass: 0 2px 8px 0 var(--color-primary-alpha-100);
+
+@ui-font-weight-title: 600;
+@ui-font-weight-normal: 400;
+
+@ui-gap-main: 6px; // 全局间距从 12px 减半到 6px
+
+@ui-anim-duration-normal: 0.2s;
+@ui-anim-duration-slow: 0.4s;
+@ui-anim-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+

@@ -124,6 +124,7 @@ export default {
 }
 .navItem {
   position: relative;
+  padding: 4px 10px;
   &:before {
     content: '';
     display: block;
@@ -133,57 +134,37 @@ export default {
 }
 .link {
   position: absolute;
-  left: 0%;
-  top: 0%;
-  width: 100%;
-  height: 100%;
-  // left: 15%;
-  // top: 15%;
-  // width: 70%;
-  // height: 70%;
-  // display: block;
+  left: 10%;
+  top: 10%;
+  width: 80%;
+  height: 80%;
   box-sizing: border-box;
-  // text-decoration: none;
-  // border-radius: 20%;
-
-  // padding: 18px 3px;
-  // margin: 5px 0;
-  // border-left: 5px solid transparent;
   transition: @transition-fast;
-  transition-property: background-color, opacity;
+  transition-property: background-color, transform, box-shadow;
   color: var(--color-nav-font);
   cursor: pointer;
-  // font-size: 11.5px;
   text-align: center;
   outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: @ui-radius-component;
 
-  // border-radius: @radius-border;
   .mixin-ellipsis-1();
+
+  // 移除旧的垂直线条
   &:before {
-    .mixin-after();
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background-color: var(--color-primary-dark-200-alpha-700);
-    border-radius: 4px;
-    transform: translateX(-100%);
-    transition: transform @transition-fast;
+    display: none;
   }
 
   &.active {
-    // border-left-color: @color-theme-active;
-    background-color: var(--color-primary-light-300-alpha-700);
-
-    &:before {
-      transform: translateX(0);
-    }
+    background-color: var(--color-primary-light-200-alpha-600);
+    box-shadow: @ui-shadow-glass;
+    color: var(--color-primary);
 
     &:hover {
-      background-color: var(--color-primary-light-300-alpha-800);
+      background-color: var(--color-primary-light-200-alpha-700);
+      transform: scale(1.05);
     }
   }
 
@@ -192,15 +173,15 @@ export default {
     color: var(--color-nav-font);
 
     &:not(.active) {
-      opacity: .8;
-      background-color: var(--color-primary-light-400-alpha-700);
+      background-color: var(--color-primary-light-400-alpha-200);
+      transform: scale(1.05);
     }
   }
-  &:active:not(.active) {
-    opacity: .6;
-    background-color: var(--color-primary-light-300-alpha-600);
+  &:active {
+    transform: scale(0.92);
   }
 }
+
 
 // .icon {
 //   // margin-bottom: 5px;

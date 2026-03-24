@@ -490,35 +490,48 @@ table {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    // border-top: 1px solid rgba(0, 0, 0, 0.12);
-    transition: 0.2s ease;
-    transition-property: background-color, color;
-    // border-bottom: 1px solid @color-theme_2-line;
+    transition: @transition-fast;
+    transition-property: background-color, color, transform, box-shadow, backdrop-filter;
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: 13px;
+    margin: 4px 10px; // 增加间距使其卡片化
+    border-radius: @ui-radius-component;
+    cursor: pointer;
 
     &:hover {
-      background-color: var(--color-primary-background-hover);
+      background-color: var(--color-primary-light-100-alpha-200);
+      backdrop-filter: blur(8px);
+      transform: scale(1.008);
+      box-shadow: @ui-shadow-glass;
 
-      // .list-item-cell-action {
-      //   display: block;
-      // }
+      .num {
+        color: var(--color-primary);
+      }
     }
     &.active {
-      background-color: var(--color-primary-background-active);
+      background-color: var(--color-primary-light-200-alpha-400);
+      backdrop-filter: blur(8px);
+      box-shadow: @ui-shadow-glass;
+      color: var(--color-primary);
+      
+      .num {
+        color: var(--color-primary);
+        font-weight: @ui-font-weight-title;
+      }
     }
     &.selected {
-      background-color: var(--color-primary-background-hover);
+      background-color: var(--color-primary-light-100-alpha-300);
+      box-shadow: @ui-shadow-glass;
     }
     &.disabled {
-      opacity: .5;
+      opacity: .4;
+      cursor: not-allowed;
     }
     .list-item-cell {
       flex: none;
-      padding: 0 6px;
+      padding: 0 10px;
       position: relative;
-      // transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      line-height: 16px;
+      line-height: 1.5;
       vertical-align: middle;
       box-sizing: border-box;
       .mixin-ellipsis-1();
@@ -530,10 +543,11 @@ table {
       &.num, .num {
         .nobreak();
         .center();
-        padding-left: 3px;
-        padding-right: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
         font-size: 11px;
         color: var(--color-font-label);
+        transition: color @transition-fast;
       }
 
       &.name {

@@ -126,33 +126,61 @@ body {
   display: flex;
   height: 100%;
   background-color: var(--color-app-background);
+  padding: @ui-gap-main; 
+  gap: @ui-gap-main; 
 }
 
 #left {
   flex: none;
   width: @width-app-left;
+  margin: 0 !important;
 }
 #right {
   flex: auto;
   display: flex;
   flex-flow: column nowrap;
   transition: background-color @transition-normal;
-  background-color: var(--color-main-background);
+  background-color: transparent;
 
-  border-top-left-radius: @radius-border;
-  border-bottom-left-radius: @radius-border;
-  overflow: hidden;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+  gap: 0; // 移除工具栏、内容区、播放栏之间的 gap，改为无缝或微调
 }
-#toolbar, #player {
+
+#toolbar {
   flex: none;
+  backdrop-filter: blur(@ui-glass-blur);
+  background-color: @ui-glass-background;
+  border: @ui-glass-border;
+  border-bottom: none; // 与内容区衔接
+  border-top-left-radius: @ui-radius-component;
+  border-top-right-radius: @ui-radius-component;
+  box-shadow: none; // 移除卡片投影
+  padding: 0 4px;
 }
+
 #view {
   position: relative;
   flex: auto;
-  // display: flex;
   min-height: 0;
+
+  // 主内容区：改为一个开阔的大面板，与工具栏融合
+  backdrop-filter: blur(@ui-glass-blur);
+  background-color: @ui-glass-background;
+  border: @ui-glass-border;
+  border-bottom-left-radius: @ui-radius-component;
+  border-bottom-right-radius: @ui-radius-component;
+  overflow: hidden;
+  box-shadow: none;
 }
+
+#player {
+  flex: none;
+  margin-top: @ui-gap-main !important; // 播放栏与内容区保持一定距离
+}
+
+
 
 .view-container {
   transition: opacity @transition-normal;

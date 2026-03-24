@@ -20,18 +20,24 @@ import NavBar from './NavBar.vue'
 @import '@renderer/assets/styles/layout.less';
 
 .aside {
-  // box-shadow: 0 0 5px rgba(0, 0, 0, .3);
   transition: @transition-normal;
-  transition-property: background-color;
-  // background-color: @color-theme-sidebar;
-  // background-color: @color-aside-background;
-  // border-right: 2px solid var(--color-primary);
+  transition-property: background-color, transform;
+  backdrop-filter: blur(@ui-glass-blur);
+  background-color: @ui-glass-background;
+  border-right: @ui-glass-border;
   -webkit-app-region: drag;
   -webkit-user-select: none;
   display: flex;
   flex-flow: column nowrap;
 
+  // 紧凑化
+  border-radius: @ui-radius-component; // 减小圆角
+  box-shadow: @ui-shadow-soft;
+  z-index: 10;
+
   &.fullscreen {
+    margin: 0;
+    border-radius: 0;
     -webkit-app-region: no-drag;
     .logo {
       display: none;
@@ -42,14 +48,16 @@ import NavBar from './NavBar.vue'
 .logo {
   box-sizing: border-box;
   padding: 0 13%;
-  height: 50px;
+  height: 50px; // 恢复到 50px，更紧凑
   color: var(--color-nav-font);
-  opacity: .8;
+  opacity: .9;
   flex: none;
   text-align: center;
   line-height: 50px;
   font-weight: bold;
-  // -webkit-app-region: no-drag;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
 }
+
 
 </style>

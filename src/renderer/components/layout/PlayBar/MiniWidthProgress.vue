@@ -152,68 +152,57 @@ export default {
 .player {
   position: relative;
   height: @height-player;
-  border-top: 1px solid var(--color-primary-alpha-900);
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   contain: strict;
-  padding: 6px;
-  z-index: 2;
-  // box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 12px;
+  z-index: 10;
+
+  // 紧凑玻璃板风格
+  backdrop-filter: blur(@ui-glass-blur);
+  background-color: @ui-glass-background;
+  border: @ui-glass-border;
+  border-radius: @ui-radius-component;
+  box-shadow: @ui-shadow-soft;
+  transition: @transition-normal;
+  transition-property: background-color, box-shadow;
+
   * {
     box-sizing: border-box;
   }
 
+  // 移除旧的背景伪元素
   &:before {
-    .mixin-after();
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-main-background);
-    opacity: .9;
-    z-index: -1;
+    display: none;
   }
 }
 
 .picContent {
-  height: 100%;
+  height: 80%;
   aspect-ratio: 1 / 1;
-
-  // color: var(--color-primary);
-  // transition: @transition-normal;
-  // transition-property: color;
   flex: none;
-  opacity: 1;
-  transition: opacity @transition-fast;
-  // transition-property: opacity;
+  transition: transform @transition-fast;
   display: flex;
   justify-content: center;
-  // align-items: center;
   cursor: pointer;
 
   &:hover {
-    opacity: .8;
+    transform: scale(1.05);
   }
 
-  // svg {
-  //   fill: currentColor;
-  // }
   img {
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: @ui-shadow-glass;
     max-width: 100%;
     max-height: 100%;
-    transition: @transition-normal;
-    transition-property: border-color;
-    // border-radius: 50%;
-    border-radius: @radius-border;
-    // border: 2px solid @color-theme_2-background_1;
+    border-radius: @ui-radius-component;
+    object-fit: cover;
   }
 
   .emptyPic {
     background-color: var(--color-primary-light-900-alpha-200);
-    border-radius: @radius-border;
+    border-radius: @ui-radius-component;
     width: 100%;
     height: 100%;
     display: flex;
@@ -221,41 +210,39 @@ export default {
     justify-content: center;
     color: var(--color-primary-light-400-alpha-200);
     user-select: none;
-    font-size: 20px;
-    font-family: Consolas, "Courier New", monospace;
+    font-size: 16px;
+    font-family: @ui-font-weight-title;
 
     span {
-      padding-left: 3px;
+      padding-left: 2px;
     }
   }
 }
 
 .infoContent {
-  padding: 0 10px;
+  padding-left: 12px;
   flex: auto;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: flex-start;
-  font-size: 13px;
-  color: var(--color-font);
   min-width: 0;
-  line-height: 1.5;
 }
 
 .title {
   max-width: 100%;
-  font-size: 12px;
-  color: var(--color-font-label);
+  font-size: 14px;
+  font-weight: @ui-font-weight-title;
+  color: var(--color-font);
   .mixin-ellipsis-1();
 }
 .status {
-  padding-top: 3px;
-  height: 23px;
+  padding-top: 2px;
+  font-size: 11px;
+  color: var(--color-font-label);
   .mixin-ellipsis-1();
   max-width: 100%;
 }
-
 // .timeContainer {
 //   flex: none;
 //   padding: 15px 0;

@@ -1,7 +1,8 @@
 <template lang="pug">
 transition(enter-active-class="animated slideInRight" leave-active-class="animated slideOutDown" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave")
-  div(v-if="isShowPlayerDetail" :class="[$style.container, { fullscreen: isFullscreen }]" @contextmenu="handleContextMenu")
+  div(v-if="isShowPlayerDetail" :class="[$style.container, { fullscreen: isFullscreen, [$style.dynamicBg]: playDetailBgSrc }]" @contextmenu="handleContextMenu")
     div(:class="$style.bg")
+      img(v-if="playDetailBgSrc" :class="$style.bgImage" :src="playDetailBgSrc" decoding="async" aria-hidden="true")
     ControlBtnsLeftHeader(v-if="appSetting['common.controlBtnPosition'] == 'left'")
     ControlBtnsRightHeader(v-else)
     div(:class="[$style.main, {[$style.showComment]: isShowPlayComment}]")
@@ -222,6 +223,37 @@ export default {
       window.removeEventListener('resize', syncMetaScrollState)
     })
 
+    const playDetailBgSrc = ref('')
+    watch(
+      [
+        () => musicInfo.pic,
+        () => appSetting['playDetail.isDynamicBackground'],
+      ],
+      ([pic, isDynamicBackground], _prev, onCleanup) => {
+        playDetailBgSrc.value = ''
+        if (!isDynamicBackground || !pic) return
+
+        let isCancelled = false
+        const img = new Image()
+        img.onload = () => {
+          if (isCancelled) return
+          playDetailBgSrc.value = pic
+        }
+        img.onerror = () => {
+          if (isCancelled) return
+          playDetailBgSrc.value = ''
+        }
+        img.src = pic
+
+        onCleanup(() => {
+          isCancelled = true
+          img.onload = null
+          img.onerror = null
+        })
+      },
+      { immediate: true },
+    )
+
 
     return {
       appSetting,
@@ -237,6 +269,7 @@ export default {
       handleAfterLeave,
       visibled,
       isFullscreen,
+      playDetailBgSrc,
       metaScrollState,
       setMetaViewportRef,
       setMetaTextRef,
@@ -296,10 +329,14 @@ export default {
   left: 0;
   background: var(--background-image) var(--background-image-position) no-repeat;
   background-size: var(--background-image-size);
-  // filter: blur(60px);
   opacity: .7;
   z-index: -1;
+  overflow: hidden;
   &:before {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
     content: '';
     display: block;
     width: 100%;
@@ -308,6 +345,7 @@ export default {
   }
   &:after {
     position: absolute;
+    z-index: 2;
     left: 0;
     top: 0;
     content: '';
@@ -318,6 +356,37 @@ export default {
       radial-gradient(circle at top left, var(--color-primary-light-100-alpha-500), transparent 34%),
       radial-gradient(circle at 82% 18%, var(--color-primary-alpha-500), transparent 26%),
       linear-gradient(135deg, var(--color-main-background), var(--color-content-background));
+  }
+}
+
+.bgImage {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 50%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  transform: translate(-50%, -50%) scale(1.18);
+  filter: blur(30px);
+  opacity: .95;
+}
+
+.dynamicBg {
+  .bg {
+    background-image: none;
+
+    &:before {
+      background-color: var(--color-content-background);
+      opacity: .54;
+    }
+    &:after {
+      background:
+        radial-gradient(circle at 24% 18%, var(--color-primary-light-100-alpha-500), transparent 34%),
+        radial-gradient(circle at 78% 22%, var(--color-primary-alpha-400), transparent 30%),
+        linear-gradient(135deg, var(--color-main-background), var(--color-content-background));
+      opacity: .36;
+    }
   }
 }
 

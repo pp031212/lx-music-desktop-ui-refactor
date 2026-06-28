@@ -71,6 +71,7 @@ const defaultSetting: LX.AppSetting = {
   'playDetail.style.align': 'left',
   'playDetail.style.fontWeight': true,
   'playDetail.isDelayScroll': true,
+  'playDetail.isDynamicBackground': true,
 
   'desktopLyric.enable': false,
   'desktopLyric.isLock': false,

@@ -536,6 +536,7 @@
   "setting__play_detail_font_size_current": "当前字体大小：{size}",
   "setting__play_detail_font_size_reset": "重置",
   "setting__play_detail_font_zoom": "缩放当前正在播放的歌词",
+  "setting__play_detail_dynamic_background": "使用动态背景",
   "setting__play_detail_lyric_delay_scroll": "延迟歌词滚动",
   "setting__play_detail_lyric_progress": "允许通过拖拽歌词调整播放进度",
   "setting__play_lyric_lxlrc": "使用卡拉 OK 式歌词播放（如果可用）",

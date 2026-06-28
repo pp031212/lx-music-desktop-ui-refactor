@@ -319,6 +319,11 @@ declare global {
        */
       'playDetail.isDelayScroll': boolean
 
+      /**
+       * 播放详情页-是否使用动态背景
+       */
+      'playDetail.isDynamicBackground': boolean
+
 
       /**
        * 是否启用桌面歌词

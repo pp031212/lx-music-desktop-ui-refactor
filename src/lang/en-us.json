@@ -536,6 +536,7 @@
   "setting__play_detail_font_size_current": "Current font size: {size}",
   "setting__play_detail_font_size_reset": "Reset",
   "setting__play_detail_font_zoom": "Zoom currently playing lyrics",
+  "setting__play_detail_dynamic_background": "Using dynamic background",
   "setting__play_detail_lyric_delay_scroll": "Delay scrolling lyrics",
   "setting__play_detail_lyric_progress": "Allow to adjust playback progress by drag-and-drop lyrics",
   "setting__play_lyric_lxlrc": "Playback with karaoke-style lyrics if available",

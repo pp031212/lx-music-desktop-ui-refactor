@@ -12,7 +12,7 @@ material-modal(:show="modelValue" bg-close teleport="#view" @close="handleClose"
           p {{ api.description }}
           div
             base-checkbox(:id="`user_api_${api.id}`" v-model="api.allowShowUpdateAlert" :class="$style.checkbox" :label="$t('user_api__allow_show_update_alert')" @change="handleChangeAllowUpdateAlert(api, $event)")
-        base-btn(:class="$style.listBtn" outline :aria-label="$t('user_api__btn_remove')" @click.stop="handleRemove(index)")
+        base-btn(:class="$style.listBtn" outline :disabled="isImporting" :aria-label="$t('user_api__btn_remove')" @click.stop="handleRemove(index)")
           svg(v-once version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 212.982 212.982" space="preserve")
             use(xlink:href="#icon-delete")
     div(v-else :class="$style.content")
@@ -23,8 +23,8 @@ material-modal(:show="modelValue" bg-close teleport="#view" @close="handleClose"
         span.hover.underline(aria-label="https://lxmusic.toside.cn/desktop/custom-source" @click="handleOpenUrl('https://lyswhut.github.io/lx-music-doc/desktop/custom-source')") FAQ
       p {{ $t('user_api__note') }}
     div(:class="$style.footer")
-      base-btn(:class="$style.footerBtn" @click="isShowOnlineImportModal = true") {{ $t('user_api__btn_import_online') }}
-      base-btn(:class="$style.footerBtn" @click="handleImport") {{ $t('user_api__btn_import') }}
+      base-btn(:class="$style.footerBtn" :disabled="isImporting" @click="isShowOnlineImportModal = true") {{ $t('user_api__btn_import_online') }}
+      base-btn(:class="$style.footerBtn" :disabled="isImporting" @click="handleImport") {{ $t('user_api__btn_import') }}
       //- base-btn(:class="$style.footerBtn" @click="handleExport") {{ $t('user_api__btn_export') }}
     UserApiOnlineImportModal(v-model:show="isShowOnlineImportModal" @import="importUserApi")
 </template>
@@ -38,6 +38,7 @@ import { userApi } from '@renderer/store'
 import { appSetting, updateSetting } from '@renderer/store/setting'
 import { computed, ref } from '@common/utils/vueTools'
 import { dialog } from '@renderer/plugins/Dialog'
+import path from 'node:path'
 
 import UserApiOnlineImportModal from './UserApiOnlineImportModal.vue'
 
@@ -54,6 +55,7 @@ export default {
   emits: ['update:modelValue'],
   setup() {
     const isShowOnlineImportModal = ref(false)
+    const isImporting = ref(false)
     const apiList = computed(() => userApi.list)
 
     return {
@@ -61,6 +63,7 @@ export default {
       apiList,
       appSetting,
       isShowOnlineImportModal,
+      isImporting,
     }
   },
   methods: {
@@ -71,27 +74,50 @@ export default {
         void dialog(this.$t('user_api_import__failed', { message: err.message }))
       })
     },
-    handleImport() {
-      if (this.userApi.list.length > 20) {
+    async handleImport() {
+      if (this.isImporting) return
+      if (this.userApi.list.length >= 20) {
         this.$dialog({
           message: this.$t('user_api__max_tip'),
           confirmButtonText: this.$t('ok'),
         })
         return
       }
-      void showSelectDialog({
-        title: this.$t('user_api__import_file'),
-        properties: ['openFile'],
-        filters: [
-          { name: 'LX API File', extensions: ['js'] },
-          { name: 'All Files', extensions: ['*'] },
-        ],
-      }).then(async result => {
-        if (result.canceled) return
-        return readFile(result.filePaths[0]).then(async data => {
-          return this.importUserApi(data.toString())
+      this.isImporting = true
+      try {
+        const result = await showSelectDialog({
+          title: this.$t('user_api__import_file'),
+          properties: ['openFile', 'multiSelections'],
+          filters: [
+            { name: 'LX API File', extensions: ['js'] },
+            { name: 'All Files', extensions: ['*'] },
+          ],
         })
-      })
+        if (result.canceled) return
+        const errors = []
+        let reachedLimit = false
+        for (const filePath of result.filePaths) {
+          if (this.userApi.list.length >= 20) {
+            reachedLimit = true
+            break
+          }
+          try {
+            const data = await readFile(filePath)
+            const { apiList } = await importUserApi(data.toString())
+            userApi.list = apiList
+          } catch (err) {
+            errors.push(`${path.basename(filePath)}: ${err.message}`)
+          }
+        }
+        const messages = []
+        if (errors.length) messages.push(this.$t('user_api_import__failed', { message: errors.join('\n') }))
+        if (reachedLimit) messages.push(this.$t('user_api__max_tip'))
+        if (messages.length) void dialog(messages.join('\n\n'))
+      } catch (err) {
+        void dialog(this.$t('user_api_import__failed', { message: err.message }))
+      } finally {
+        this.isImporting = false
+      }
     },
     handleExport() {
 

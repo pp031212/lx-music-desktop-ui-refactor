@@ -41,6 +41,9 @@
 - 歌曲信息区长文本滚动展示优化
 - 底部主控制区样式调整
 - 歌词右键菜单与歌词显示细节优化
+
+当前已同步至官方 **v2.12.6**，保留 LX Music UR 的播放详情页定制和独立应用配置。同步基准及验证记录见 [同步记录](./doc/upstream-sync-2.12.6.md)。
+
 <p><img width="100%" src="./doc/images/detail.png" alt="lx-music detail UI"></p>
 
 如需向原项目贡献代码，请以原项目仓库的说明、Issue 讨论及 `dev` 分支 PR 流程为准。

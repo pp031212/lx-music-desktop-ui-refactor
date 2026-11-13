@@ -8,6 +8,7 @@ import {
   setUserDataPath,
   registerDeeplink,
   listenerAppEvent,
+  ensureLinuxDisplayBackend,
 } from './app'
 import { isLinux } from '@common/utils'
 import { initAppSetting } from '@main/app'
@@ -23,6 +24,7 @@ const init = () => {
   })
 }
 
+ensureLinuxDisplayBackend()
 initGlobalData()
 initSingleInstanceHandle()
 applyElectronEnvParams()

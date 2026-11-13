@@ -80,6 +80,8 @@ const linuxOptions = {
     // artifactName: '${productName}-${version}.${env.ARCH}.${ext}',
     icon: './resources/icons',
     category: 'Utility;AudioVideo;Audio;Player;Music;',
+    // Desktop lyric dragging uses setBounds, which requires X11/XWayland.
+    executableArgs: ['--ozone-platform=x11'],
     desktop: {
       // https://www.electron.build/app-builder-lib.interface.linuxdesktopfile
       // https://www.electronjs.org/docs/latest/tutorial/linux-desktop-actions

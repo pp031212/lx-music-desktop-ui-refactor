@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { env } from 'node:process'
 import { existsSync, mkdirSync, renameSync } from 'fs'
 import { app, shell, screen, nativeTheme, dialog } from 'electron'
 import { URL_SCHEME_RXP } from '@common/constants'
@@ -104,13 +105,20 @@ export const initSingleInstanceHandle = () => {
   })
 }
 
+export const ensureLinuxDisplayBackend = () => {
+  // Ozone is initialized before the main script; changing the switch here is too late.
+  // Relaunch direct/older shortcuts with XWayland so desktop lyrics can be positioned.
+  if (process.platform != 'linux' || !env.DISPLAY) return
+  if (app.commandLine.getSwitchValue('ozone-platform') == 'x11') return
+  if (process.argv.some(arg => /^--ozone-platform(?:=|$)/.test(arg))) return
+  app.relaunch({ args: [...process.argv.slice(1), '--ozone-platform=x11'] })
+  app.exit(0)
+}
+
 export const applyElectronEnvParams = () => {
   // Is disable hardware acceleration
   if (global.envParams.cmdParams.dha) app.disableHardwareAcceleration()
   if (global.envParams.cmdParams.dhmkh) app.commandLine.appendSwitch('disable-features', 'HardwareMediaKeyHandling')
-
-  // fix linux transparent fail. https://github.com/electron/electron/issues/25153#issuecomment-843688494
-  if (process.platform == 'linux') app.commandLine.appendSwitch('use-gl', 'desktop')
 
   // https://github.com/electron/electron/issues/22691
   app.commandLine.appendSwitch('wm-window-animations-disabled')

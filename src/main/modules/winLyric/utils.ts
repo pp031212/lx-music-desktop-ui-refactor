@@ -1,3 +1,5 @@
+import { screen } from 'electron'
+
 // 设置窗口位置、大小
 export let minWidth = 38
 export let minHeight = 38
@@ -111,6 +113,18 @@ export const initWindowSize = (x: LX.AppSetting['desktopLyric.x'], y: LX.AppSett
     y = bounds.y
     width = bounds.width
     height = bounds.height
+  }
+  // Recover positions saved while native Wayland ignored window movement, or after
+  // a monitor was disconnected. Keep positions that are visible on any display.
+  const position = { x, y }
+  const visible = screen.getAllDisplays().some(({ workArea }) =>
+    position.x < workArea.x + workArea.width && position.x + width > workArea.x &&
+    position.y < workArea.y + workArea.height && position.y + height > workArea.y,
+  )
+  if (!visible) {
+    const { workArea } = screen.getDisplayMatching({ x, y, width, height })
+    x = workArea.x + Math.max(0, workArea.width - width)
+    y = workArea.y + Math.max(0, workArea.height - height)
   }
   return {
     x,
